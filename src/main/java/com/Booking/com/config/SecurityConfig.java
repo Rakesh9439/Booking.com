@@ -20,12 +20,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
        http.csrf().disable().cors().disable();
         http.addFilterBefore(jwtRequestFilter, AuthorizationFilter.class);
-       http.authorizeHttpRequests()
-               .requestMatchers("api/v1/signup", "api/v1/login").permitAll() // public
-               .requestMatchers("api/v1/countries/addCountry").hasRole("USER")
-               .anyRequest().authenticated();
+        http.authorizeHttpRequests()
+                .requestMatchers("/api/v1/signup", "/api/v1/login").permitAll()
+                .requestMatchers("/api/v1/countries/addCountry").hasRole("USER")
+                .anyRequest().authenticated();
 
 
-       return http.build();
+
+        return http.build();
     }
 }
